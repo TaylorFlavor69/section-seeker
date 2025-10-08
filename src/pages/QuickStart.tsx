@@ -6,7 +6,7 @@ export default function QuickStart() {
   
   return (
     <article className="prose prose-slate max-w-none">
-      <PageNavigation currentPath={location.pathname} />
+      <PageNavigation currentPath={location.pathname} position="top" />
       
       <h1>Quick Start Guide</h1>
       

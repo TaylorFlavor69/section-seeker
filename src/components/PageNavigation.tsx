@@ -19,9 +19,10 @@ const pages: PageInfo[] = [
 
 interface PageNavigationProps {
   currentPath: string;
+  position?: 'top' | 'bottom';
 }
 
-export function PageNavigation({ currentPath }: PageNavigationProps) {
+export function PageNavigation({ currentPath, position = 'bottom' }: PageNavigationProps) {
   const currentIndex = pages.findIndex(page => page.url === currentPath);
   
   if (currentIndex === -1) return null;
@@ -34,7 +35,9 @@ export function PageNavigation({ currentPath }: PageNavigationProps) {
   const isPrevPageDifferentSection = prevPage && prevPage.section !== currentPage.section;
 
   return (
-    <nav className="mt-12 pt-8 border-t flex items-center justify-between gap-4">
+    <nav className={`flex items-center justify-between gap-4 ${
+      position === 'bottom' ? 'mt-12 pt-8 border-t' : 'mb-8'
+    }`}>
       {prevPage ? (
         <Link to={prevPage.url} className="flex-1 group">
           <Button

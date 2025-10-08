@@ -6,7 +6,7 @@ export default function Components() {
   
   return (
     <article className="prose prose-slate max-w-none">
-      <PageNavigation currentPath={location.pathname} />
+      <PageNavigation currentPath={location.pathname} position="top" />
       
       <h1>Components</h1>
       
