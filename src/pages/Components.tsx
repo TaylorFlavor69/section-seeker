@@ -17,89 +17,133 @@ export default function Components() {
 
       <h2>Mileage-Based Triggers</h2>
 
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-4">
         <span className="text-2xl">🔧</span>
         <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 rounded-full text-sm font-medium">Code: M-XXXX</span>
       </div>
 
       <p>
         Mileage triggers activate when equipment reaches specific operating hour thresholds.
-        These indicate maintenance intervals or potential replacement timing.
+        Watch these visual meters to track when machines need service.
       </p>
 
-      <pre>
-        <code>{`interface MileageTrigger {
-  code: string;           // e.g., "M-10000"
-  machineId: string;
-  currentHours: number;
-  threshold: number;
-  type: "mileage";
-  priority: "standard";
-  recommendations: {
-    service: string[];
-    parts: string[];
-    replacement: boolean;
-  };
-}
+      <div className="space-y-4 my-6">
+        <div className="p-4 bg-card rounded-lg border">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-semibold">Machine MCH-2024-001</span>
+            <span className="text-sm text-muted-foreground">5,200 / 5,000 hours</span>
+          </div>
+          <div className="h-3 bg-muted rounded-full overflow-hidden">
+            <div className="h-full bg-amber-500" style={{ width: '104%' }}></div>
+          </div>
+          <p className="text-sm text-amber-600 dark:text-amber-400 mt-2">⚠️ Service threshold reached</p>
+        </div>
 
-// Example
-const lead = {
-  code: "M-10000",
-  machineId: "MCH-2024-001",
-  currentHours: 10250,
-  threshold: 10000,
-  type: "mileage",
-  priority: "standard",
-  recommendations: {
-    service: ["Major service required", "Oil change", "Filter replacement"],
-    parts: ["Air filter", "Oil filter", "Hydraulic fluid"],
-    replacement: false
-  }
-};`}</code>
-      </pre>
+        <div className="p-4 bg-card rounded-lg border">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-semibold">Machine MCH-2024-002</span>
+            <span className="text-sm text-muted-foreground">10,250 / 10,000 hours</span>
+          </div>
+          <div className="h-3 bg-muted rounded-full overflow-hidden">
+            <div className="h-full bg-red-500" style={{ width: '102.5%' }}></div>
+          </div>
+          <p className="text-sm text-red-600 dark:text-red-400 mt-2">🔧 Major service required</p>
+        </div>
+
+        <div className="p-4 bg-card rounded-lg border">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-semibold">Machine MCH-2024-003</span>
+            <span className="text-sm text-muted-foreground">3,200 / 5,000 hours</span>
+          </div>
+          <div className="h-3 bg-muted rounded-full overflow-hidden">
+            <div className="h-full bg-green-500" style={{ width: '64%' }}></div>
+          </div>
+          <p className="text-sm text-green-600 dark:text-green-400 mt-2">✓ Operating normally</p>
+        </div>
+      </div>
 
       <h2>Age-Based Triggers</h2>
 
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-4">
         <span className="text-2xl">📅</span>
         <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-900 dark:text-purple-100 rounded-full text-sm font-medium">Code: A-XY</span>
       </div>
 
       <p>
-        Age triggers fire when machines reach specific age milestones, indicating potential
-        upgrade or replacement opportunities.
+        Age triggers fire when machines reach specific age milestones. Green indicates machines
+        past replacement age (15+ years), creating strong upgrade opportunities.
       </p>
 
-      <pre>
-        <code>{`interface AgeTrigger {
-  code: string;           // e.g., "A-5Y"
-  machineId: string;
-  age: number;            // in years
-  threshold: number;
-  type: "age";
-  priority: "standard";
-  recommendations: {
-    upgrade: boolean;
-    trade_in_value: number;
-    new_models: string[];
-  };
-}
+      <div className="space-y-4 my-6">
+        <div className="p-4 bg-card rounded-lg border">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-semibold">Machine MCH-2008-045</span>
+            <span className="text-sm font-bold text-green-600 dark:text-green-400">17 years old</span>
+          </div>
+          <div className="relative h-4 bg-muted rounded-full overflow-hidden">
+            <div className="absolute inset-0 flex">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`flex-1 ${i < 17 ? (i >= 15 ? 'bg-green-500' : 'bg-primary/30') : ''}`}
+                  style={{ borderRight: i < 19 ? '1px solid hsl(var(--background))' : 'none' }}
+                ></div>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
+            <span>0y</span>
+            <span className="text-green-600 dark:text-green-400 font-semibold">15y+</span>
+          </div>
+          <p className="text-sm text-green-600 dark:text-green-400 mt-2">✓ Prime for replacement - High trade-in value</p>
+        </div>
 
-// Example
-const lead = {
-  code: "A-7Y",
-  machineId: "MCH-2017-045",
-  age: 7,
-  threshold: 7,
-  type: "age",
-  priority: "standard",
-  recommendations: {
-    upgrade: true,
-    trade_in_value: 45000,
-    new_models: ["Model X 2024", "Model Y Pro"]
-  }
-};`}</code>
-      </pre>
+        <div className="p-4 bg-card rounded-lg border">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-semibold">Machine MCH-2014-023</span>
+            <span className="text-sm font-bold text-amber-600 dark:text-amber-400">11 years old</span>
+          </div>
+          <div className="relative h-4 bg-muted rounded-full overflow-hidden">
+            <div className="absolute inset-0 flex">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`flex-1 ${i < 11 ? 'bg-primary/30' : ''}`}
+                  style={{ borderRight: i < 19 ? '1px solid hsl(var(--background))' : 'none' }}
+                ></div>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
+            <span>0y</span>
+            <span className="font-semibold">15y+</span>
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">Approaching replacement window</p>
+        </div>
+
+        <div className="p-4 bg-card rounded-lg border">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-semibold">Machine MCH-2020-089</span>
+            <span className="text-sm font-bold">5 years old</span>
+          </div>
+          <div className="relative h-4 bg-muted rounded-full overflow-hidden">
+            <div className="absolute inset-0 flex">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`flex-1 ${i < 5 ? 'bg-primary/30' : ''}`}
+                  style={{ borderRight: i < 19 ? '1px solid hsl(var(--background))' : 'none' }}
+                ></div>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
+            <span>0y</span>
+            <span className="font-semibold">15y+</span>
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">Still in prime operating window</p>
+        </div>
+      </div>
 
       <h2>Fault Code Triggers</h2>
 
@@ -118,60 +162,65 @@ const lead = {
 
       <p>
         Fault code triggers generate immediate leads when diagnostic codes are detected.
-        Yellow codes indicate warnings, red codes signal critical issues.
+        Visual alerts show severity and required action.
       </p>
 
-      <pre>
-        <code>{`interface FaultCodeTrigger {
-  code: string;           // e.g., "FC-R-456"
-  machineId: string;
-  faultCode: number;
-  severity: "yellow" | "red";
-  type: "fault_code";
-  priority: "warning" | "critical";
-  description: string;
-  recommendations: {
-    immediate_action: boolean;
-    service_required: boolean;
-    parts_needed: string[];
-    estimated_downtime: string;
-  };
-}
+      <div className="space-y-4 my-6">
+        <div className="p-4 bg-red-50 dark:bg-red-950/30 border-2 border-red-500 rounded-lg">
+          <div className="flex items-start gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+              <span className="text-2xl">🚨</span>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-900 dark:text-red-100 rounded font-mono text-sm font-semibold">FC-R-456</span>
+                <span className="text-xs px-2 py-1 bg-red-500 text-white rounded-full font-semibold">CRITICAL</span>
+              </div>
+              <p className="font-semibold text-red-900 dark:text-red-100">Hydraulic system failure - Machine MCH-2024-002</p>
+              <div className="mt-3 space-y-1 text-sm">
+                <p className="text-red-800 dark:text-red-200">⚡ Immediate action required</p>
+                <p className="text-red-700 dark:text-red-300">🔧 Parts needed: Hydraulic pump, Pressure valve</p>
+                <p className="text-red-700 dark:text-red-300">⏱️ Estimated downtime: 1-2 days</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-// Yellow (Warning) Example
-const yellowLead = {
-  code: "FC-Y-123",
-  machineId: "MCH-2024-001",
-  faultCode: 123,
-  severity: "yellow",
-  type: "fault_code",
-  priority: "warning",
-  description: "Engine temperature sensor degraded",
-  recommendations: {
-    immediate_action: false,
-    service_required: true,
-    parts_needed: ["Temperature sensor"],
-    estimated_downtime: "2 hours"
-  }
-};
+        <div className="p-4 bg-amber-50 dark:bg-amber-950/30 border-2 border-amber-500 rounded-lg">
+          <div className="flex items-start gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-amber-500 rounded-full"></span>
+              <span className="text-2xl">⚠️</span>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="px-2 py-1 bg-amber-100 dark:bg-amber-900 text-amber-900 dark:text-amber-100 rounded font-mono text-sm font-semibold">FC-Y-123</span>
+                <span className="text-xs px-2 py-1 bg-amber-500 text-white rounded-full font-semibold">WARNING</span>
+              </div>
+              <p className="font-semibold text-amber-900 dark:text-amber-100">Engine temperature sensor degraded - Machine MCH-2024-001</p>
+              <div className="mt-3 space-y-1 text-sm">
+                <p className="text-amber-800 dark:text-amber-200">📅 Schedule service within 1-2 weeks</p>
+                <p className="text-amber-700 dark:text-amber-300">🔧 Parts needed: Temperature sensor</p>
+                <p className="text-amber-700 dark:text-amber-300">⏱️ Estimated downtime: 2 hours</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-// Red (Critical) Example
-const redLead = {
-  code: "FC-R-456",
-  machineId: "MCH-2024-002",
-  faultCode: 456,
-  severity: "red",
-  type: "fault_code",
-  priority: "critical",
-  description: "Hydraulic system failure",
-  recommendations: {
-    immediate_action: true,
-    service_required: true,
-    parts_needed: ["Hydraulic pump", "Pressure valve"],
-    estimated_downtime: "1-2 days"
-  }
-};`}</code>
-      </pre>
+        <div className="p-4 bg-green-50 dark:bg-green-950/30 border border-green-500/50 rounded-lg">
+          <div className="flex items-start gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+              <span className="text-2xl">✓</span>
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold text-green-900 dark:text-green-100">No active fault codes - Machine MCH-2024-003</p>
+              <p className="text-sm text-green-700 dark:text-green-300 mt-1">All systems operating normally</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h2>Priority Visual Reference</h2>
 
