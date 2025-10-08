@@ -6,6 +6,8 @@ export default function Introduction() {
   
   return (
     <article className="prose prose-slate max-w-none">
+      <PageNavigation currentPath={location.pathname} />
+      
       <h1>Introduction to the Knowledge Base</h1>
       
       <p>

@@ -6,6 +6,8 @@ export default function Configuration() {
   
   return (
     <article className="prose prose-slate max-w-none">
+      <PageNavigation currentPath={location.pathname} />
+      
       <h1>Configuration</h1>
       
       <p>

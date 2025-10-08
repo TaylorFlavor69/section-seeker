@@ -6,6 +6,8 @@ export default function ApiReference() {
   
   return (
     <article className="prose prose-slate max-w-none">
+      <PageNavigation currentPath={location.pathname} />
+      
       <h1>API Reference</h1>
       
       <p>
