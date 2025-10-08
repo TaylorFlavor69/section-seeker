@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+import { PageNavigation } from "@/components/PageNavigation";
+
 export default function DataModels() {
+  const location = useLocation();
+  
   return (
     <article className="prose prose-slate max-w-none">
       <h1>Data Models</h1>
@@ -159,6 +164,8 @@ ValidationRules.minLength(user.password, 8);`}</code>
           Always use prepared statements or parameterized queries to prevent SQL injection attacks.
         </p>
       </div>
+
+      <PageNavigation currentPath={location.pathname} />
     </article>
   );
 }

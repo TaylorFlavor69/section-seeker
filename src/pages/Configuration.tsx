@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+import { PageNavigation } from "@/components/PageNavigation";
+
 export default function Configuration() {
+  const location = useLocation();
+  
   return (
     <article className="prose prose-slate max-w-none">
       <h1>Configuration</h1>
@@ -232,9 +237,11 @@ export default {
   encryption: {
     algorithm: 'aes-256-gcm',
     keyRotation: 30, // days
-  },
+      },
 };`}</code>
       </pre>
+
+      <PageNavigation currentPath={location.pathname} />
     </article>
   );
 }

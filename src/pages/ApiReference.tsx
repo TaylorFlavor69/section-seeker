@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+import { PageNavigation } from "@/components/PageNavigation";
+
 export default function ApiReference() {
+  const location = useLocation();
+  
   return (
     <article className="prose prose-slate max-w-none">
       <h1>API Reference</h1>
@@ -165,6 +170,8 @@ input.addEventListener('input', (e) => {
           and customization options.
         </p>
       </div>
+
+      <PageNavigation currentPath={location.pathname} />
     </article>
   );
 }

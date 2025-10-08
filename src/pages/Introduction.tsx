@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+import { PageNavigation } from "@/components/PageNavigation";
+
 export default function Introduction() {
+  const location = useLocation();
+  
   return (
     <article className="prose prose-slate max-w-none">
       <h1>Introduction to the Knowledge Base</h1>
@@ -51,6 +56,8 @@ export default function Introduction() {
       <p>
         Get started by exploring the sections in the sidebar, beginning with the Quick Start guide.
       </p>
+
+      <PageNavigation currentPath={location.pathname} />
     </article>
   );
 }

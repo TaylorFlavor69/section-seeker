@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+import { PageNavigation } from "@/components/PageNavigation";
+
 export default function Components() {
+  const location = useLocation();
+  
   return (
     <article className="prose prose-slate max-w-none">
       <h1>Components</h1>
@@ -112,6 +117,8 @@ export default function Components() {
           <li>Forget to handle edge cases in render methods</li>
         </ul>
       </div>
+
+      <PageNavigation currentPath={location.pathname} />
     </article>
   );
 }

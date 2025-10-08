@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+import { PageNavigation } from "@/components/PageNavigation";
+
 export default function QuickStart() {
+  const location = useLocation();
+  
   return (
     <article className="prose prose-slate max-w-none">
       <h1>Quick Start Guide</h1>
@@ -80,6 +85,8 @@ export default MyComponent;`}</code>
           You're all set! Continue to the Core Concepts section to dive deeper into the platform.
         </p>
       </div>
+
+      <PageNavigation currentPath={location.pathname} />
     </article>
   );
 }
